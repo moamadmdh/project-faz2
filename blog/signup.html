@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه ثبت‌نام</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #patient_info,
+        #secretary_info {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <form action="process_registration.php" method="post">
+        <h1>ثبت‌نام</h1>
+
+        <label for="user_role">نقش کاربر:</label>
+        <select name="user_role" id="user_role" required>
+            <option value="patient">بیمار</option>
+            <option value="secretary">منشی</option>
+        </select>
+
+        <label for="username">نام کاربری:</label>
+        <input type="text" name="username" id="username" required>
+
+        <label for="password">رمز عبور:</label>
+        <input type="password" name="password" id="password" required>
+
+        <label for="email">ایمیل:</label>
+        <input type="email" name="email" id="email" required>
+
+        <!-- اطلاعات بیمار -->
+        <div id="patient_info">
+            <label for="patient_name">نام بیمار:</label>
+            <input type="text" name="patient_name" id="patient_name">
+            <!-- سایر اطلاعات بیمار می‌توانند اینجا اضافه شوند -->
+        </div>
+
+        <!-- اطلاعات منشی -->
+        <div id="secretary_info">
+            <label for="secretary_name">نام منشی:</label>
+            <input type="text" name="secretary_name" id="secretary_name">
+            <!-- سایر اطلاعات منشی می‌توانند اینجا اضافه شوند -->
+        </div>
+
+        <button type="submit">ثبت‌نام</button>
+    </form>
+
+    <script>
+        document.getElementById('user_role').addEventListener('change', function() {
+            var userRole = this.value;
+            if (userRole === 'patient') {
+                document.getElementById('patient_info').style.display = 'block';
+                document.getElementById('secretary_info').style.display = 'none';
+            } else if (userRole === 'secretary') {
+                document.getElementById('patient_info').style.display = 'none';
+                document.getElementById('secretary_info').style.display = 'block';
+            } else {
+                document.getElementById('patient_info').style.display = 'none';
+                document.getElementById('secretary_info').style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>

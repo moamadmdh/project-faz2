@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه ورود و احراز هویت</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #error-message {
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+
+        #register-link,
+        #forgot-password-link {
+            color: #3498db;
+            text-decoration: none;
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>ورود به حساب کاربری</h2>
+
+        <form id="login-form" onsubmit="return loginUser()">
+            <label for="username">نام کاربری:</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="password">رمز عبور:</label>
+            <input type="password" name="password" id="password" required>
+
+            <button type="submit">ورود</button>
+        </form>
+
+        <div id="error-message"></div>
+
+        <a href="registration.html" id="register-link">ثبت نام</a>
+        <a href="forgot-password.html" id="forgot-password-link">فراموشی رمز عبور</a>
+    </div>
+
+    <script>
+        function loginUser() {
+            // اقدامات مربوط به احراز هویت کاربر
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // اینجا باید از یک درخواست به سمت سرور (مثل Ajax) یا استفاده از یک زبان سمت سرور برای احراز هویت کاربر استفاده کنید.
+            // به عنوان یک مثال ساده:
+            if (username === "example" && password === "password") {
+                // احراز هویت موفقیت‌آمیز
+                window.location.href = "dashboard.html"; // Redirect به پنل خود کاربر
+                return false;
+            } else {
+                document.getElementById('error-message').innerText = "کاربری با این مشخصات یافت نشد.";
+                return false;
+            }
+        }
+    </script>
+
+</body>
+</html>

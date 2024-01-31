@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه ورود و احراز هویت</title>
+    <title>صفحه ورود</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Tahoma', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
@@ -16,95 +16,59 @@
             height: 100vh;
         }
 
-        .login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+        .container {
             text-align: center;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         input {
+            margin-bottom: 10px;
+            padding: 8px;
             width: 100%;
-            padding: 10px;
-            margin-bottom: 16px;
             box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
         }
 
         button {
-            background-color: #3498db;
+            background-color: #4caf50;
             color: #fff;
-            padding: 12px 20px;
+            padding: 10px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
         }
 
         button:hover {
-            background-color: #2980b9;
-        }
-
-        #error-message {
-            color: #e74c3c;
-            margin-top: 10px;
-        }
-
-        #register-link,
-        #forgot-password-link {
-            color: #3498db;
-            text-decoration: none;
-            margin-top: 10px;
-            display: block;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-
-    <div class="login-container">
-        <h2>ورود به حساب کاربری</h2>
-
-        <form id="login-form" onsubmit="return loginUser()">
-            <label for="username">نام کاربری:</label>
-            <input type="text" name="username" id="username" required>
-
-            <label for="password">رمز عبور:</label>
-            <input type="password" name="password" id="password" required>
-
-            <button type="submit">ورود</button>
+    <div class="container">
+        <h2>احراز هویت کاربر</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="نام کاربری" required>
+            <input type="password" id="password" placeholder="رمز عبور" required>
+            <button type="button" onclick="login()">ورود</button>
         </form>
+        <p id="resultMessage"></p>
+        <p>آیا حساب کاربری ندارید؟ <a href="signup.html">ثبت نام</a></p>
+        <p>رمز عبور خود را فراموش کرده‌اید؟ <a href="OPT.html">دریافت رمز یکبار مصرف</a></p>
 
-        <div id="error-message"></div>
+        <script>
+            function login() {
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
 
-        <a href="registration.html" id="register-link">ثبت نام</a>
-        <a href="forgot-password.html" id="forgot-password-link">فراموشی رمز عبور</a>
-    </div>
-
-    <script>
-        function loginUser() {
-         
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            if (username === "example" && password === "password") {
-                // احراز هویت موفقیت‌آمیز
-                window.location.href = "dashboard.html"; 
-                return false;
-            } else {
-                document.getElementById('error-message').innerText = "کاربری با این مشخصات یافت نشد.";
-                return false;
+                if (username === "user" && password === "pass") {
+                    document.getElementById("resultMessage").innerHTML = "ورود موفقیت‌آمیز!";
+                } else {
+                    document.getElementById("resultMessage").innerHTML = "اطلاعات وارد شده صحیح نیستند.";
+                }
             }
-        }
-    </script>
-
+        </script>
+    </div>
 </body>
 </html>

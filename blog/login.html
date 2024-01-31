@@ -92,15 +92,12 @@
 
     <script>
         function loginUser() {
-            // اقدامات مربوط به احراز هویت کاربر
+         
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
-
-            // اینجا باید از یک درخواست به سمت سرور (مثل Ajax) یا استفاده از یک زبان سمت سرور برای احراز هویت کاربر استفاده کنید.
-            // به عنوان یک مثال ساده:
             if (username === "example" && password === "password") {
                 // احراز هویت موفقیت‌آمیز
-                window.location.href = "dashboard.html"; // Redirect به پنل خود کاربر
+                window.location.href = "dashboard.html"; 
                 return false;
             } else {
                 document.getElementById('error-message').innerText = "کاربری با این مشخصات یافت نشد.";

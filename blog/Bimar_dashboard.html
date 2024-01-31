@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه بیمار</title>
+    <style>
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* تغییر این مقدار برای کنترل عرض کلی صفحه */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+
+        select {
+            margin-top: 10px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>صفحه بیمار</h2>
+
+        <!-- ثبت نوبت -->
+        <h3>ثبت نوبت</h3>
+        <select id="appointmentList">
+            <option value="نوبت1">نوبت 1</option>
+            <option value="نوبت2">نوبت 2</option>
+            <option value="نوبت3">نوبت 3</option>
+            <!-- افزودن نوبت‌های دیگر به ترتیب -->
+        </select>
+        <button onclick="reserveAppointment()">ثبت نوبت</button>
+
+        <!-- حذف نوبت -->
+        <h3>حذف نوبت</h3>
+        <select id="userAppointments">
+            <option value="نوبت1">نوبت 1</option>
+            <option value="نوبت2">نوبت 2</option>
+            <option value="نوبت3">نوبت 3</option>
+            <!-- نوبت‌های کاربر را از سرور دریافت کنید و به ترتیب اضافه کنید -->
+        </select>
+        <button onclick="cancelAppointment()">لغو نوبت</button>
+
+        <a href="#" onclick="viewAppointments()">مشاهده نوبت‌ها</a>
+
+        <a href="update.html">تغییر مشخصات پروفایل</a>
+        <a href="login.html">خروج از حساب کاربری</a>
+
+
+    <script>
+        function reserveAppointment() {
+            var selectedAppointment = document.getElementById("appointmentList").value;
+            alert("نوبت " + selectedAppointment + " با موفقیت ثبت شد!");
+        }
+
+        function cancelAppointment() {
+            var selectedUserAppointment = document.getElementById("userAppointments").value;
+            alert("نوبت " + selectedUserAppointment + " با موفقیت حذف شد!");
+        }
+
+        function viewAppointments() {
+            alert("لیست نوبت‌ها:\n- نوبت 1\n- نوبت 2\n- نوبت 3");
+        }
+
+        function editProfile() {
+            alert("صفحه ویرایش پروفایل برای بیمار");
+
+        }
+
+        function logout() {
+            alert("با موفقیت از حساب کاربری خارج شدید!");
+        }
+    </script>
+    </div>
+</body>
+</html>

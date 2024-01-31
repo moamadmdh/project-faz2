@@ -4,6 +4,30 @@ from .models import Patient, Secretary
 from django.contrib import messages
 from .forms import SignupForm
 
+def user_login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    try:
+        patient = Patient.objects.get(username=username)
+        if patient.password == password:
+            # Login successful, redirect patient to their page
+            return redirect('patient_page')
+    except Patient.DoesNotExist:
+        pass
+
+    try: 
+        secretary = Secretary.objects.get(username=username)
+        if secretary.password == password:
+            # Login successful, redirect secretary to their page
+            return redirect('secretary_page')
+    except Secretary.DoesNotExist:
+        pass
+
+    # Invalid login credentials
+    messages.error(request, 'Invalid username or password')
+    return redirect('login.html')
+
+
 def user_signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)

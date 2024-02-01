@@ -73,7 +73,7 @@ def add_clinic(request):
         services = request.POST['services']
         try:
             user = ClinicModel.objects.get(email=email)
-            return redirect('/login?msg=dup email')
+            return redirect('dup email')
         except:
             pass
         try:

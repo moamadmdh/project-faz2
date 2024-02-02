@@ -14,7 +14,5 @@ def password_validators(password):
             Sum += int(pas)
     if len(password) < 8 or len(password) > 50:
         raise ValidationError("invalid password please enter a valid password")
-    if Sum % 6 == 0:
-        raise ValidationError("invalid password please enter a valid password")
     if re.search(r"\s", password):
         raise ValidationError("invalid password please enter a valid password")

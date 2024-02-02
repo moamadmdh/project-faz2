@@ -22,3 +22,10 @@ class ClinicModel(models.Model):
     )
     services = models.CharField(max_length=255,null=True
     )
+import uuid   
+class Appointment(models.Model):
+    appointmentID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    clinic_id = models.CharField(max_length=255)
+    user_id = models.CharField(max_length=255)
+    dateTime = models.DateField(max_length=255)
+    status = models.CharField(max_length=20)

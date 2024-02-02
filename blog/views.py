@@ -1,43 +1,39 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
-from .models import Patient, Secretary
+from django.http import HttpResponse, HttpResponseRedirect
+from .models import User, ClinicModel
 from django.contrib import messages
-from .forms import SignupForm
+from .forms import SignupForm, LoginForm
 
 def user_login(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    print("username")
-    print("password")
-    try:
-        patient = Patient.objects.get(username=username)
-        if patient.password == password:
-            # Login successful, redirect patient to their page
-            return redirect('patient_page')
-    except:
-          return redirect('Wrong username or password')
-        if user is not None:
-            print("null")
-            request.session['username'] = username
-            return redirect('Welcome')
-        else:
-            return redirect('Wrong username or password')
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            
+            try:
+                patient = User.objects.get(username=username)
+                if patient.password == password:
+                    # ورود موفقیت‌آمیز بیمار، هدایت به صفحه بیمار
+                    return redirect('/Bimar_dashboard')
+            except User.DoesNotExist:
+                pass
+            
+            try:
+                secretary = User.objects.get(username=username)
+                if secretary.password == password:
+                    # ورود موفقیت‌آمیز منشی، هدایت به صفحه منشی
+                    return redirect('/Monshi_dashboard')
+            except User.DoesNotExist:
+                pass
+            
+            # اطلاعات ورود نامعتبر
+            messages.error(request, 'نام کاربری یا رمز عبور نامعتبر است')
+            
     else:
-        print("nothing")
-        return redirect('Method not allowed')
-
-
-    try: 
-        secretary = Secretary.objects.get(username=username)
-        if secretary.password == password:
-            # Login successful, redirect secretary to their page
-            return redirect('secretary_page')
-    except Secretary.DoesNotExist:
-        pass
-
-    # Invalid login credentials
-    messages.error(request, 'Invalid username or password')
-    return redirect('login.html')
+        form = LoginForm()
+    
+    return render(request, 'login.html', {'form': form})
 
 
 def user_signup(request):
@@ -49,12 +45,12 @@ def user_signup(request):
             email = form.cleaned_data['email']
             user_role = form.cleaned_data['user_role']
             
-            if user_role == 'patient':
-                new_patient = Patient(username=username, email=email, password=password, user_type=user_role)
+            if user_role == 'بیمار':
+                new_patient = User(username=username, email=email, password=password, user_type=user_role)
                 new_patient.save()
                 return render(request, 'Bimar_dashboard.html')
-            elif user_role == 'secretary':
-                new_secretary = Secretary(username=username, email=email, password=password, user_type=user_role)
+            elif user_role == 'منشی':
+                new_secretary = User(username=username, email=email, password=password, user_type=user_role)
                 new_secretary.save()
                 destination_url = '/Monshi_dashboard/'
 
@@ -63,6 +59,7 @@ def user_signup(request):
         form = SignupForm()
 
     return render(request, 'signup.html', {'form': form})
+    
 def add_clinic(request):
     if request.method == 'POST':
         clinic_id = request.POST['clinic_id']
@@ -91,4 +88,13 @@ def check_log_or_main(request):
         return redirect('/panel/')
     else:
         return redirect('Please login')
+        def Bimar_dashboard(request):
+    return render(request, 'Bimar_dashboard.html')
+
+def Monshi_dashboard(request):
+    return render(request, 'Monshi_dashboard.html')
+def signup(request):
+    return render(request, 'signup.html')
+def login(request):
+    return render(request, 'login.html')    
 
